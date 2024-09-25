@@ -1,17 +1,16 @@
-/* Style global */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f2f5; /* Couleur de fond douce */
+    background-color: #f0f2f5;
     margin: 0;
     padding: 20px;
 }
 
 h1 {
     text-align: center;
-    color: #333; /* Couleur du titre */
+    color: #333;
 }
 
-/* Formulaire de publication */
+
 form {
     background: white;
     padding: 20px;

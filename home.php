@@ -88,6 +88,8 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
             <button type="submit">Réagir</button>
         </form>
 
+        <h3>Commentaire :</h3>
+
         <!-- Afficher les commentaires -->
         <?php
         $comments = $pdo->prepare('SELECT comments.*, users.email FROM comments JOIN users ON comments.user_id = users.id WHERE post_id = ?');
