@@ -1,44 +1,112 @@
+/* Style global */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f0f2f5; /* Couleur de fond douce */
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
 h1 {
     text-align: center;
+    color: #333; /* Couleur du titre */
 }
 
+/* Formulaire de publication */
 form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-textarea, input[type="text"], select {
+textarea {
     width: 100%;
+    height: 80px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     padding: 10px;
-    margin: 5px 0;
+    resize: none;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #5cb85c;
-    border: none;
+    background-color: #007bff; /* Couleur du bouton */
     color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
     cursor: pointer;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background-color: #4cae4c;
+    background-color: #0056b3; /* Couleur du bouton au survol */
 }
 
-hr {
-    margin: 20px 0;
-}
-
+/* Publication */
 div {
-    background-color: white;
-    padding: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+h3 {
+    margin: 0 0 10px;
+    color: #333; /* Couleur du nom de l'utilisateur */
+}
+
+p {
+    margin: 5px 0;
+    color: #555; /* Couleur du texte */
+}
+
+small {
+    display: block;
+    color: #999; /* Couleur du timestamp */
+    margin-top: 5px;
+}
+
+/* Réactions */
+span {
+    display: inline-block;
+    margin-right: 15px;
+    color: #007bff; /* Couleur des réactions */
+}
+
+/* Formulaire de commentaire */
+input[type="text"] {
+    width: calc(100% - 120px);
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* Styles de déconnexion */
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+button a:hover {
+    text-decoration: underline;
+}
+
+/* Responsivité */
+@media (max-width: 600px) {
+    textarea {
+        height: 60px;
+    }
+
+    input[type="text"] {
+        width: calc(100% - 70px);
+    }
 }

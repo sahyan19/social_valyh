@@ -35,7 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Récupérer toutes les publications avec les utilisateurs
 $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC')->fetchAll();
 ?>
+
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
 <h1>Bienvenue sur Social Valyh</h1>
 
 <!-- Formulaire pour créer une nouvelle publication -->
@@ -58,7 +62,13 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
         $reactions = $pdo->prepare('SELECT type, COUNT(*) as count FROM reactions WHERE post_id = ? GROUP BY type');
         $reactions->execute([$post['id']]);
         foreach ($reactions as $reaction): ?>
-            <span><?= htmlspecialchars($reaction['type']) ?>: <?= $reaction['count'] ?></span>
+            <span>
+                <i class="fas fa-thumbs-up" title="Like"></i> <?= htmlspecialchars($reaction['type'] == 'like' ? $reaction['count'] : '') ?>
+                <i class="fas fa-heart" title="Love"></i> <?= htmlspecialchars($reaction['type'] == 'love' ? $reaction['count'] : '') ?>
+                <i class="fas fa-surprise" title="Wow"></i> <?= htmlspecialchars($reaction['type'] == 'wow' ? $reaction['count'] : '') ?>
+                <i class="fas fa-sad-tear" title="Sad"></i> <?= htmlspecialchars($reaction['type'] == 'sad' ? $reaction['count'] : '') ?>
+                <i class="fas fa-angry" title="Angry"></i> <?= htmlspecialchars($reaction['type'] == 'angry' ? $reaction['count'] : '') ?>
+            </span>
         <?php endforeach; ?>
         
         <!-- Formulaire pour ajouter une réaction à la publication -->
@@ -88,7 +98,13 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                 $comment_reactions = $pdo->prepare('SELECT type, COUNT(*) as count FROM reactions WHERE comment_id = ? GROUP BY type');
                 $comment_reactions->execute([$comment['id']]);
                 foreach ($comment_reactions as $reaction): ?>
-                    <span><?= htmlspecialchars($reaction['type']) ?>: <?= $reaction['count'] ?></span>
+                    <span>
+                        <i class="fas fa-thumbs-up" title="Like"></i> <?= htmlspecialchars($reaction['type'] == 'like' ? $reaction['count'] : '') ?>
+                        <i class="fas fa-heart" title="Love"></i> <?= htmlspecialchars($reaction['type'] == 'love' ? $reaction['count'] : '') ?>
+                        <i class="fas fa-surprise" title="Wow"></i> <?= htmlspecialchars($reaction['type'] == 'wow' ? $reaction['count'] : '') ?>
+                        <i class="fas fa-sad-tear" title="Sad"></i> <?= htmlspecialchars($reaction['type'] == 'sad' ? $reaction['count'] : '') ?>
+                        <i class="fas fa-angry" title="Angry"></i> <?= htmlspecialchars($reaction['type'] == 'angry' ? $reaction['count'] : '') ?>
+                    </span>
                 <?php endforeach; ?>
 
                 <!-- Formulaire pour réagir au commentaire -->
@@ -116,5 +132,5 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
         <hr>
     </div>
 
-<button><a href="logout.php">Se Déconnecter</a></button>
 <?php endforeach; ?>
+<button><a href="logout.php">Se Déconnecter</a></button>
