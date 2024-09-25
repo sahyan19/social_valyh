@@ -67,11 +67,11 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
             }
             ?>
             <span>
-                <i class="fas fa-thumbs-up" title="Like"></i> <?= $reactionCounts['like'] ?? 0 ?>
-                <i class="fas fa-heart" title="Love"></i> <?= $reactionCounts['love'] ?? 0 ?>
-                <i class="fas fa-surprise" title="Wow"></i> <?= $reactionCounts['wow'] ?? 0 ?>
-                <i class="fas fa-sad-tear" title="Sad"></i> <?= $reactionCounts['sad'] ?? 0 ?>
-                <i class="fas fa-angry" title="Angry"></i> <?= $reactionCounts['angry'] ?? 0 ?>
+                <i class="fas fa-thumbs-up reaction-like" title="Like"></i> <?= $reactionCounts['like'] ?? 0 ?>
+                <i class="fas fa-heart reaction-love" title="Love"></i> <?= $reactionCounts['love'] ?? 0 ?>
+                <i class="fas fa-surprise reaction-wow" title="Wow"></i> <?= $reactionCounts['wow'] ?? 0 ?>
+                <i class="fas fa-sad-tear reaction-sad" title="Sad"></i> <?= $reactionCounts['sad'] ?? 0 ?>
+                <i class="fas fa-angry reaction-angry" title="Angry"></i> <?= $reactionCounts['angry'] ?? 0 ?>
             </span>
         </div>
         

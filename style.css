@@ -30,7 +30,7 @@ textarea {
 }
 
 button {
-    background-color: #007bff; /* Couleur du bouton */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -40,10 +40,10 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3; /* Couleur du bouton au survol */
+    background-color: #0056b3; 
 }
 
-/* Publication */
+
 div {
     background: white;
     padding: 15px;
@@ -54,28 +54,46 @@ div {
 
 h3 {
     margin: 0 0 10px;
-    color: #333; /* Couleur du nom de l'utilisateur */
+    color: #333; 
 }
 
 p {
     margin: 5px 0;
-    color: #555; /* Couleur du texte */
+    color: #555;/
 }
 
 small {
     display: block;
-    color: #999; /* Couleur du timestamp */
+    color: #999;
     margin-top: 5px;
 }
 
-/* Réactions */
+
 span {
     display: inline-block;
     margin-right: 15px;
-    color: #007bff; /* Couleur des réactions */
 }
 
-/* Formulaire de commentaire */
+.reaction-like {
+    color: #007bff; 
+}
+
+.reaction-love {
+    color: #e83e8c; 
+}
+
+.reaction-wow {
+    color: #fd7e14; /
+}
+
+.reaction-sad {
+    color: #6c757d;
+}
+
+.reaction-angry {
+    color: #dc3545;
+}
+
 input[type="text"] {
     width: calc(100% - 120px);
     border-radius: 5px;
@@ -90,7 +108,7 @@ select {
     padding: 10px;
 }
 
-/* Styles de déconnexion */
+
 button a {
     color: white;
     text-decoration: none;
@@ -100,7 +118,7 @@ button a:hover {
     text-decoration: underline;
 }
 
-/* Responsivité */
+
 @media (max-width: 600px) {
     textarea {
         height: 60px;
