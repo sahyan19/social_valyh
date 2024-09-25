@@ -20,14 +20,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $pdo->prepare('INSERT INTO comments (post_id, user_id, content) VALUES (?, ?, ?)');
         $stmt->execute([$_POST['post_id'], $user_id, $_POST['comment_content']]);
     }
-    // Gestion des réactions
-    if (isset($_POST['reaction']) && isset($_POST['post_id'])) {
-        $stmt = $pdo->prepare('INSERT INTO reactions (post_id, user_id, type) VALUES (?, ?, ?)');
-        $stmt->execute([$_POST['post_id'], $user_id, $_POST['reaction']]);
+    // Gestion des réactions sur les publications ou commentaires
+    if (isset($_POST['reaction'])) {
+        if (isset($_POST['post_id'])) {
+            $stmt = $pdo->prepare('INSERT INTO reactions (post_id, user_id, type) VALUES (?, ?, ?)');
+            $stmt->execute([$_POST['post_id'], $user_id, $_POST['reaction']]);
+        } elseif (isset($_POST['comment_id'])) {
+            $stmt = $pdo->prepare('INSERT INTO reactions (comment_id, user_id, type) VALUES (?, ?, ?)');
+            $stmt->execute([$_POST['comment_id'], $user_id, $_POST['reaction']]);
+        }
     }
 }
 
-// Récupérer toutes les publications
+// Récupérer toutes les publications avec les utilisateurs
 $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC')->fetchAll();
 ?>
 <link rel="stylesheet" href="style.css">
@@ -48,26 +53,16 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
         <p><?= htmlspecialchars($post['content']) ?></p>
         <small>Publié le <?= $post['created_at'] ?></small>
 
-        <!-- Afficher les commentaires -->
+        <!-- Afficher les réactions sur la publication -->
         <?php
-        $comments = $pdo->prepare('SELECT comments.*, users.email FROM comments JOIN users ON comments.user_id = users.id WHERE post_id = ?');
-        $comments->execute([$post['id']]);
-        foreach ($comments as $comment): ?>
-            <div style="margin-left: 20px;">
-                <strong><?= htmlspecialchars($comment['email']) ?> :</strong> <?= htmlspecialchars($comment['content']) ?>
-                <small>Commenté le <?= $comment['created_at'] ?></small>
-            </div>
+        $reactions = $pdo->prepare('SELECT type, COUNT(*) as count FROM reactions WHERE post_id = ? GROUP BY type');
+        $reactions->execute([$post['id']]);
+        foreach ($reactions as $reaction): ?>
+            <span><?= htmlspecialchars($reaction['type']) ?>: <?= $reaction['count'] ?></span>
         <?php endforeach; ?>
-
-        <!-- Formulaire pour ajouter un commentaire -->
-        <form method="POST" style="margin-left: 20px;">
-            <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-            <input type="text" name="comment_content" placeholder="Ajouter un commentaire" required>
-            <button type="submit">Commenter</button>
-        </form>
-
-        <!-- Formulaire pour ajouter une réaction -->
-        <form method="POST" style="margin-left: 20px;">
+        
+        <!-- Formulaire pour ajouter une réaction à la publication -->
+        <form method="POST">
             <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
             <select name="reaction">
                 <option value="like">Like</option>
@@ -77,6 +72,45 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                 <option value="angry">Angry</option>
             </select>
             <button type="submit">Réagir</button>
+        </form>
+
+        <!-- Afficher les commentaires -->
+        <?php
+        $comments = $pdo->prepare('SELECT comments.*, users.email FROM comments JOIN users ON comments.user_id = users.id WHERE post_id = ?');
+        $comments->execute([$post['id']]);
+        foreach ($comments as $comment): ?>
+            <div style="margin-left: 20px;">
+                <strong><?= htmlspecialchars($comment['email']) ?> :</strong> <?= htmlspecialchars($comment['content']) ?>
+                <small>Commenté le <?= $comment['created_at'] ?></small>
+
+                <!-- Afficher les réactions sur le commentaire -->
+                <?php
+                $comment_reactions = $pdo->prepare('SELECT type, COUNT(*) as count FROM reactions WHERE comment_id = ? GROUP BY type');
+                $comment_reactions->execute([$comment['id']]);
+                foreach ($comment_reactions as $reaction): ?>
+                    <span><?= htmlspecialchars($reaction['type']) ?>: <?= $reaction['count'] ?></span>
+                <?php endforeach; ?>
+
+                <!-- Formulaire pour réagir au commentaire -->
+                <form method="POST" style="margin-left: 20px;">
+                    <input type="hidden" name="comment_id" value="<?= $comment['id'] ?>">
+                    <select name="reaction">
+                        <option value="like">Like</option>
+                        <option value="love">Love</option>
+                        <option value="wow">Wow</option>
+                        <option value="sad">Sad</option>
+                        <option value="angry">Angry</option>
+                    </select>
+                    <button type="submit">Réagir</button>
+                </form>
+            </div>
+        <?php endforeach; ?>
+
+        <!-- Formulaire pour ajouter un commentaire -->
+        <form method="POST" style="margin-left: 20px;">
+            <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+            <input type="text" name="comment_content" placeholder="Ajouter un commentaire" required>
+            <button type="submit">Commenter</button>
         </form>
 
         <hr>
