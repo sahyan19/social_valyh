@@ -13,9 +13,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
-<form method="POST">
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Mot de passe" required>
-    <button type="submit">S'inscrire</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>INscription</title>
+</head>
+<body>
+    <form method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+        <button type="submit">S'inscrire</button>
+    </form>
+</body>
+</html>

@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Récupérer toutes les publications
 $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts.user_id = users.id ORDER BY posts.created_at DESC')->fetchAll();
 ?>
-
-<h1>Bienvenue sur le mini réseau social</h1>
+<link rel="stylesheet" href="style.css">
+<h1>Bienvenue sur Social Valyh</h1>
 
 <!-- Formulaire pour créer une nouvelle publication -->
 <form method="POST">
@@ -81,4 +81,6 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
 
         <hr>
     </div>
+
+<button><a href="logout.php">Se Déconnecter</a></button>
 <?php endforeach; ?>
