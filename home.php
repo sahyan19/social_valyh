@@ -2,6 +2,7 @@
 include("db.php");
 session_start();
 
+// Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
@@ -9,6 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+// Gestion des requêtes POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Gestion des publications
     if (isset($_POST['content'])) {
@@ -53,17 +55,19 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
 <?php foreach ($posts as $post): ?>
     <div>
         <h3><?= htmlspecialchars($post['email']) ?> a publié :</h3>
-        <p><?= htmlspecialchars($post['content']) ?></p>
-        <small>Publié le <?= $post['created_at'] ?></small>
+        <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+        <small>Publié le <?= htmlspecialchars($post['created_at']) ?></small>
 
-        <!-- Afficher les réactions sur la publication -->
+        <!-- Réactions et bouton Détails -->
         <div>
             <?php
-            $reactions = $pdo->prepare('SELECT type, COUNT(*) as count FROM reactions WHERE post_id = ? GROUP BY type');
+            $reactions = $pdo->prepare('SELECT type, user_id, created_at FROM reactions WHERE post_id = ?');
             $reactions->execute([$post['id']]);
+            $reactionDetails = $reactions->fetchAll(PDO::FETCH_ASSOC);
+            
             $reactionCounts = [];
-            foreach ($reactions as $reaction) {
-                $reactionCounts[$reaction['type']] = $reaction['count'];
+            foreach ($reactionDetails as $reaction) {
+                $reactionCounts[$reaction['type']] = ($reactionCounts[$reaction['type']] ?? 0) + 1;
             }
             ?>
             <span>
@@ -73,12 +77,33 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                 <i class="fas fa-sad-tear reaction-sad" title="Sad"></i> <?= $reactionCounts['sad'] ?? 0 ?>
                 <i class="fas fa-angry reaction-angry" title="Angry"></i> <?= $reactionCounts['angry'] ?? 0 ?>
             </span>
+            
+            <!-- Bouton Détails -->
+            <button onclick="toggleDetails(<?= $post['id'] ?>)">Détails</button>
+            
+            <!-- Détails des réactions -->
+            <div id="details-<?= $post['id'] ?>" style="display: none;">
+                <ul>
+                    <?php foreach ($reactionDetails as $detail): 
+                        // Récupérez l'email de l'utilisateur qui a réagi
+                        $user_stmt = $pdo->prepare('SELECT email FROM users WHERE id = ?');
+                        $user_stmt->execute([$detail['user_id']]);
+                        $user = $user_stmt->fetch();
+                        // Vérifiez si l'utilisateur existe
+                        if ($user) {
+                    ?>
+                        <li><?= htmlspecialchars($user['email']) ?> a réagi avec <?= htmlspecialchars($detail['type']) ?> le <?= htmlspecialchars($detail['created_at']) ?></li>
+                    <?php } endforeach; ?>
+                </ul>
+            </div>
         </div>
+        
         
         <!-- Formulaire pour ajouter une réaction à la publication -->
         <form method="POST">
             <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-            <select name="reaction">
+            <select name="reaction" required>
+                <option value="" disabled selected>Réagir...</option>
                 <option value="like">Like</option>
                 <option value="love">Love</option>
                 <option value="wow">Wow</option>
@@ -88,7 +113,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
             <button type="submit">Réagir</button>
         </form>
 
-        <h3>Commentaire :</h3>
+        <h3>Commentaires :</h3>
 
         <!-- Afficher les commentaires -->
         <?php
@@ -96,32 +121,55 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
         $comments->execute([$post['id']]);
         foreach ($comments as $comment): ?>
             <div style="margin-left: 20px;">
-                <strong><?= htmlspecialchars($comment['email']) ?> :</strong> <?= htmlspecialchars($comment['content']) ?>
-                <small>Commenté le <?= $comment['created_at'] ?></small>
+                <strong><?= htmlspecialchars($comment['email']) ?> :</strong> <?= nl2br(htmlspecialchars($comment['content'])) ?>
+                <small>Commenté le <?= htmlspecialchars($comment['created_at']) ?></small>
 
-                <!-- Afficher les réactions sur le commentaire -->
+                <!-- Réactions et bouton Détails pour les commentaires -->
                 <div>
                     <?php
-                    $comment_reactions = $pdo->prepare('SELECT type, COUNT(*) as count FROM reactions WHERE comment_id = ? GROUP BY type');
-                    $comment_reactions->execute([$comment['id']]);
-                    $commentReactionCounts = [];
-                    foreach ($comment_reactions as $reaction) {
-                        $commentReactionCounts[$reaction['type']] = $reaction['count'];
+                    // Utilisez ici le bon id pour récupérer les réactions du commentaire
+                    $commentReactions = $pdo->prepare('SELECT type, user_id, created_at FROM reactions WHERE comment_id = ?');
+                    $commentReactions->execute([$comment['id']]);
+                    $reactionDetails = $commentReactions->fetchAll(PDO::FETCH_ASSOC);
+                    
+                    $reactionCounts = [];
+                    foreach ($reactionDetails as $reaction) {
+                        $reactionCounts[$reaction['type']] = ($reactionCounts[$reaction['type']] ?? 0) + 1;
                     }
                     ?>
                     <span>
-                        <i class="fas fa-thumbs-up reaction-like" title="Like"></i> <?= $commentReactionCounts['like'] ?? 0 ?>
-                        <i class="fas fa-heart reaction-love" title="Love"></i> <?= $commentReactionCounts['love'] ?? 0 ?>
-                        <i class="fas fa-surprise reaction-wow" title="Wow"></i> <?= $commentReactionCounts['wow'] ?? 0 ?>
-                        <i class="fas fa-sad-tear reaction-sad" title="Sad"></i> <?= $commentReactionCounts['sad'] ?? 0 ?>
-                        <i class="fas fa-angry reaction-angry" title="Angry"></i> <?= $commentReactionCounts['angry'] ?? 0 ?>
+                        <i class="fas fa-thumbs-up reaction-like" title="Like"></i> <?= $reactionCounts['like'] ?? 0 ?>
+                        <i class="fas fa-heart reaction-love" title="Love"></i> <?= $reactionCounts['love'] ?? 0 ?>
+                        <i class="fas fa-surprise reaction-wow" title="Wow"></i> <?= $reactionCounts['wow'] ?? 0 ?>
+                        <i class="fas fa-sad-tear reaction-sad" title="Sad"></i> <?= $reactionCounts['sad'] ?? 0 ?>
+                        <i class="fas fa-angry reaction-angry" title="Angry"></i> <?= $reactionCounts['angry'] ?? 0 ?>
                     </span>
+                    
+                    <!-- Bouton Détails -->
+                    <button onclick="toggleDetails(<?= $comment['id'] ?>, 'comment')">Détails</button>
+                    
+                    <!-- Détails des réactions -->
+                    <div id="details-comment-<?= $comment['id'] ?>" style="display: none;">
+                        <ul>
+                            <?php foreach ($reactionDetails as $detail): 
+                                // Récupérez l'email de l'utilisateur qui a réagi
+                                $user_stmt = $pdo->prepare('SELECT email FROM users WHERE id = ?');
+                                $user_stmt->execute([$detail['user_id']]);
+                                $user = $user_stmt->fetch();
+                                // Vérifiez si l'utilisateur existe
+                                if ($user) {
+                            ?>
+                                <li><?= htmlspecialchars($user['email']) ?> a réagi avec <?= htmlspecialchars($detail['type']) ?> le <?= htmlspecialchars($detail['created_at']) ?></li>
+                            <?php } endforeach; ?>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- Formulaire pour réagir au commentaire -->
                 <form method="POST" style="margin-left: 20px;">
                     <input type="hidden" name="comment_id" value="<?= $comment['id'] ?>">
-                    <select name="reaction">
+                    <select name="reaction" required>
+                        <option value="" disabled selected>Réagir...</option>
                         <option value="like">Like</option>
                         <option value="love">Love</option>
                         <option value="wow">Wow</option>
@@ -136,11 +184,11 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
         <!-- Formulaire pour ajouter un commentaire -->
         <form method="POST" style="margin-left: 20px;">
             <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-            <input type="text" name="comment_content" placeholder="Ajouter un commentaire" required>
+            <textarea name="comment_content" placeholder="Votre commentaire..." required></textarea>
             <button type="submit">Commenter</button>
         </form>
-
-        <hr>
     </div>
+    <hr>
 <?php endforeach; ?>
 <button><a href="logout.php">Se Déconnecter</a></button>
+<script src="script.js"></script>

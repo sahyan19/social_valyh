@@ -113,8 +113,11 @@ button a {
     text-decoration: none;
 }
 
-button a:hover {
-    text-decoration: underline;
+#details {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 
