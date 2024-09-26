@@ -2,7 +2,6 @@
 include("db.php");
 session_start();
 
-// Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
@@ -25,11 +24,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Gestion des réactions sur les publications ou commentaires
     if (isset($_POST['reaction'])) {
         if (isset($_POST['post_id'])) {
-            $stmt = $pdo->prepare('INSERT INTO reactions (post_id, user_id, type) VALUES (?, ?, ?)');
-            $stmt->execute([$_POST['post_id'], $user_id, $_POST['reaction']]);
+            // Vérifiez si l'utilisateur a déjà réagi à cette publication
+            $stmt = $pdo->prepare('SELECT * FROM reactions WHERE post_id = ? AND user_id = ?');
+            $stmt->execute([$_POST['post_id'], $user_id]);
+            $existingReaction = $stmt->fetch();
+
+            if ($existingReaction) {
+                // Si une réaction existe, mettez à jour la réaction
+                $stmt = $pdo->prepare('UPDATE reactions SET type = ? WHERE post_id = ? AND user_id = ?');
+                $stmt->execute([$_POST['reaction'], $_POST['post_id'], $user_id]);
+            } else {
+                // Sinon, insérez une nouvelle réaction
+                $stmt = $pdo->prepare('INSERT INTO reactions (post_id, user_id, type) VALUES (?, ?, ?)');
+                $stmt->execute([$_POST['post_id'], $user_id, $_POST['reaction']]);
+            }
         } elseif (isset($_POST['comment_id'])) {
-            $stmt = $pdo->prepare('INSERT INTO reactions (comment_id, user_id, type) VALUES (?, ?, ?)');
-            $stmt->execute([$_POST['comment_id'], $user_id, $_POST['reaction']]);
+            // Vérifiez si l'utilisateur a déjà réagi à ce commentaire
+            $stmt = $pdo->prepare('SELECT * FROM reactions WHERE comment_id = ? AND user_id = ?');
+            $stmt->execute([$_POST['comment_id'], $user_id]);
+            $existingReaction = $stmt->fetch();
+
+            if ($existingReaction) {
+                // Si une réaction existe, mettez à jour la réaction
+                $stmt = $pdo->prepare('UPDATE reactions SET type = ? WHERE comment_id = ? AND user_id = ?');
+                $stmt->execute([$_POST['reaction'], $_POST['comment_id'], $user_id]);
+            } else {
+                // Sinon, insérez une nouvelle réaction
+                $stmt = $pdo->prepare('INSERT INTO reactions (comment_id, user_id, type) VALUES (?, ?, ?)');
+                $stmt->execute([$_POST['comment_id'], $user_id, $_POST['reaction']]);
+            }
         }
     }
 }
@@ -165,8 +188,8 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                     </div>
                 </div>
 
-                <!-- Formulaire pour réagir au commentaire -->
-                <form method="POST" style="margin-left: 20px;">
+                <!-- Formulaire pour ajouter une réaction au commentaire -->
+                <form method="POST">
                     <input type="hidden" name="comment_id" value="<?= $comment['id'] ?>">
                     <select name="reaction" required>
                         <option value="" disabled selected>Réagir...</option>
@@ -181,8 +204,8 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
             </div>
         <?php endforeach; ?>
 
-        <!-- Formulaire pour ajouter un commentaire -->
-        <form method="POST" style="margin-left: 20px;">
+        <!-- Formulaire pour ajouter un commentaire à la publication -->
+        <form method="POST">
             <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
             <textarea name="comment_content" placeholder="Votre commentaire..." required></textarea>
             <button type="submit">Commenter</button>
@@ -190,5 +213,11 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
     </div>
     <hr>
 <?php endforeach; ?>
-<button><a href="logout.php">Se Déconnecter</a></button>
-<script src="script.js"></script>
+<button><a href="logout.php">Déconnexion</a></button>
+
+<script>
+function toggleDetails(id, type = 'post') {
+    const detailsDiv = document.getElementById(type === 'post' ? 'details-' + id : 'details-comment-' + id);
+    detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
+}
+</script>

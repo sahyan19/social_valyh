@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare('INSERT INTO users (email, password) VALUES (?, ?)');
     if ($stmt->execute([$email, $password])) {
         echo 'Inscription réussie ! <a href="login.php">Connectez-vous</a>';
-        header("Location : login.php");
     } else {
         echo 'Erreur lors de l\'inscription.';
     }
