@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_id'] = $user['id'];
         header('Location: home.php');
     } else {
-        echo 'Identifiants incorrects.';
+        echo '<h1>Identifiants incorrects ou Compte introuvable</h1>';
+        echo "<button><a href='register.php' >S'inscrire</a></button>";
     }
 }
 ?>

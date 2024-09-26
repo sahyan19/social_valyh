@@ -42,7 +42,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,1,1,'premier commentaire','2024-09-25 05:26:49'),(2,1,2,'commentaire d\'un autre utilisateur','2024-09-25 05:32:28'),(3,2,1,'test de commentaire avec une autre compte','2024-09-25 06:22:10'),(4,2,1,'test de commentaire avec une autre compte','2024-09-25 06:23:58');
+INSERT INTO `comments` VALUES (1,1,1,'Et Ceci est mon commentaire sur cette publication...','2024-09-26 08:37:57'),(2,2,2,'Vous pouvez mettre des commentaires ici si vouc voulez me dire quelque chose ou faire des remarques :*','2024-09-26 08:40:09'),(3,2,3,'De aona lesy ra Hasina, inona ity emoji an lah ity hahahahaha !','2024-09-26 08:42:26'),(4,2,2,'Mba manandrana ftsn lesy za ah hihihihihi','2024-09-26 08:43:30');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,1,'Premier test de publication','2024-09-25 05:26:31'),(2,2,'deuxième publication','2024-09-25 06:21:19');
+INSERT INTO `posts` VALUES (1,1,'Mon premier publication sur cette compte...','2024-09-26 08:37:24'),(2,2,'Et Ceci est une autre publication publier avec mn autre compte! :)','2024-09-26 08:39:16');
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `reactions` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `reactions_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `reactions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `reactions` (
 
 LOCK TABLES `reactions` WRITE;
 /*!40000 ALTER TABLE `reactions` DISABLE KEYS */;
-INSERT INTO `reactions` VALUES (1,1,1,'wow','2024-09-25 05:26:57',NULL),(2,1,1,'wow','2024-09-25 05:31:20',NULL),(3,1,2,'love','2024-09-25 05:32:01',NULL),(4,1,2,'love','2024-09-25 05:32:39',NULL),(5,NULL,2,'wow','2024-09-25 05:49:25',2),(6,2,2,'love','2024-09-25 06:21:27',NULL),(7,NULL,1,'love','2024-09-25 06:29:25',3),(8,NULL,1,'wow','2024-09-25 06:29:31',3),(9,NULL,1,'wow','2024-09-25 06:48:58',3),(10,2,1,'angry','2024-09-25 06:49:19',NULL),(11,2,1,'angry','2024-09-25 06:54:05',NULL),(12,NULL,1,'love','2024-09-25 06:54:27',1);
+INSERT INTO `reactions` VALUES (1,1,1,'love','2024-09-26 08:37:28',NULL),(2,NULL,1,'like','2024-09-26 08:38:06',1),(3,2,2,'love','2024-09-26 08:39:21',NULL),(4,1,3,'like','2024-09-26 08:41:01',NULL),(5,NULL,3,'wow','2024-09-26 08:41:08',1),(6,NULL,3,'like','2024-09-26 08:42:31',3),(7,NULL,2,'like','2024-09-26 08:43:41',4);
 /*!40000 ALTER TABLE `reactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'tahirihasinarakotomanga@gmail.com','$2y$10$W07.t9h3HANpiEgvLSgQiucAWs6XFeskSp05DCQ0KaJEtCRiEGAdi','2024-09-25 05:25:56'),(2,'sahyan@gmail.com','$2y$10$2cgbVs2ONNBDXxAvA5kNuuBfItO1267WWnMB.XC3YSs6kFE7HGMl.','2024-09-25 05:31:38');
+INSERT INTO `users` VALUES (1,'sahyan@gmail.com','$2y$10$eHwL/n/ZexD9tfn677XTcuJVHdV9OXwhR3pMIe1CKoGiOJ2bDwB7K','2024-09-26 08:36:47'),(2,'tahirihasinarakotomanga@gmail.com','$2y$10$0Ro5vuM6ZJ93fWgwR7W3ueeMZe7BOHh1wFIapZ23qqqaZYFa0A4Qi','2024-09-26 08:38:27'),(3,'hrakoto@gmail.com','$2y$10$i7/9cK/Lbt.UQRBJrp1d2OJFurBbTh/Rz4S4AH7g5EpV5NJZLcAry','2024-09-26 08:40:32');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -142,4 +142,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-25 10:11:20
+-- Dump completed on 2024-09-26 11:45:36
