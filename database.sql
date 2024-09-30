@@ -93,7 +93,7 @@ CREATE TABLE `reactions` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `reactions_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `reactions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `reactions` (
 
 LOCK TABLES `reactions` WRITE;
 /*!40000 ALTER TABLE `reactions` DISABLE KEYS */;
-INSERT INTO `reactions` VALUES (1,1,1,'love','2024-09-26 08:37:28',NULL),(2,NULL,1,'like','2024-09-26 08:38:06',1),(3,2,2,'love','2024-09-26 08:39:21',NULL),(4,1,3,'like','2024-09-26 08:41:01',NULL),(5,NULL,3,'wow','2024-09-26 08:41:08',1),(6,NULL,3,'like','2024-09-26 08:42:31',3),(7,NULL,2,'like','2024-09-26 08:43:41',4);
+INSERT INTO `reactions` VALUES (1,1,1,'love','2024-09-26 08:37:28',NULL),(2,NULL,1,'like','2024-09-26 08:38:06',1),(3,2,2,'like','2024-09-26 08:39:21',NULL),(4,1,3,'like','2024-09-26 08:41:01',NULL),(5,NULL,3,'wow','2024-09-26 08:41:08',1),(6,NULL,3,'like','2024-09-26 08:42:31',3),(7,NULL,2,'like','2024-09-26 08:43:41',4),(8,NULL,2,'love','2024-09-26 08:47:41',1);
 /*!40000 ALTER TABLE `reactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,4 +142,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-26 11:45:36
+-- Dump completed on 2024-09-30  8:21:20
