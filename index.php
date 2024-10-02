@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="style.css">
     <title>Social Valyh</title>
 </head>
-<body class="body_index">
-    <h1 class="h1_index">Social Valyh</h1>
-    <a class="a_index" href="login.php">Se Connecter</a>
-    <a class="a_index" href="register.php">S'inscrire</a>
+<body class="body-index">
+    <h1 class="h1-index">Social Valyh</h1>
+    <a class="a-index" href="login.php">Se Connecter</a>
+    <a class="a-index" href="register.php">S'inscrire</a>
 </body>
 </html>
