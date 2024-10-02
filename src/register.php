@@ -23,11 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="container-formulaire">
-        <form method="POST" class="formulaire-login">
-            <h1>Inscription</h1>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Mot de passe" required>
-            <button type="submit">S'inscrire</button>
+        <h2>Inscription</h2>
+        <form method="POST" class="formulaire">
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="Email" required><br>
+            <label for="password">Mot de Passe:</label>
+            <input type="password" name="password" placeholder="Mot de passe" required><br>
+            <button type="submit" id="inscription">S'inscrire</button>
         </form>
     </div>
 </body>

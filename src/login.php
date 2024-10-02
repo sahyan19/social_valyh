@@ -29,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="container-formulaire">
-        <form method="POST" >
-            <div class="formulaire-login">
-                <h1>Connexion</h1>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Mot de passe" required>
+        <h2>Connexion</h2>
+        <form method="POST" class="formulaire">
+                <label for="email">Email:</label>
+                <input type="email" name="email" placeholder="Email" required><br>
+                <label for="password">Mot de passe:</label>
+                <input type="password" name="password" placeholder="Mot de passe" required><br>
                 <button type="submit">Se connecter</button>
-            </div>
         </form>
     </div>
 </body>

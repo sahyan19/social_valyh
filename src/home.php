@@ -73,7 +73,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
 <div class="container">
     <div>
         <div class="user">
-            <img src="./img/imageTeste.png" alt="Photo de profil" class="pdp">
+            <img src="../img/imageTeste.png" alt="Photo de profil" class="pdp">
             <h4><?= htmlspecialchars($user_email['email']) ?></h4>
         </div>
         <button><a href="logout.php">Déconnexion</a></button>
@@ -91,7 +91,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
         <!-- Affichage des publications -->
         <?php foreach ($posts as $post): ?>
             <div>
-                <h3 class="head-post"><img src="./img/imageTeste.png" alt="photo de profil" class="image-gros"><?= htmlspecialchars($post['email']) ?> a publié :</h3>
+                <h3 class="head-post"><img src="../img/imageTeste.png" alt="photo de profil" class="image-gros"><?= htmlspecialchars($post['email']) ?> a publié :</h3>
                 <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
                 <small>Publié le <?= htmlspecialchars($post['created_at']) ?></small>
 
@@ -158,7 +158,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                     <div style="margin-left: 20px;">
                         <div class="comment-item">
                             <div class="comment-inside">
-                                <img src="./img/imageTeste.png" alt="Photo de profil" class="image-mini">
+                                <img src="../img/imageTeste.png" alt="Photo de profil" class="image-mini">
                                 <strong><?= htmlspecialchars($comment['email']) ?> :</strong>
                             </div>
                             <p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
