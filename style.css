@@ -15,6 +15,27 @@
     text-align: center;
 }
 
+.container {
+    display: flex;
+}
+
+.content {
+    width: 100%;
+}
+
+.user {
+    height: fit-content;
+    display: flex;
+    gap : 1em;
+    align-items: center;
+}
+.pdp {
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+}
+
+
 .h1_index {
     font-size: 3rem;
     color: #4a4a8e;
@@ -158,7 +179,23 @@ button a {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+.comment-inside, .head-post {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
 
+.image-gros {
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+}
+
+.image-mini {
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+}
 
 @media (max-width: 600px) {
     textarea {
