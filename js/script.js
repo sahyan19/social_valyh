@@ -77,3 +77,73 @@ function update_comment_reactions(comment_id, reaction) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send('comment_id=' + comment_id + '&reaction=' + reaction);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Gestion de l'ajout d'une publication
+    const postForm = document.getElementById('post-form');
+    postForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(postForm);
+
+        fetch('home.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Ajoutez ici le code pour afficher la nouvelle publication
+            const postContainer = document.createElement('div');
+            postContainer.id = `post-${data.id}`;
+            postContainer.innerHTML = `
+                <h3 class="head-post"><img src="../img/imageTeste.png" alt="photo de profil" class="image-gros">${data.email} a publié :</h3>
+                <p>${data.content}</p>
+                <small>Publié le ${data.created_at}</small>
+                <h3>Commentaires :</h3>
+                <div id="comments-${data.id}"></div>
+                <form class="comment-form" data-post-id="${data.id}">
+                    <textarea name="comment_content" placeholder="Votre commentaire..." required></textarea>
+                    <button type="submit">Commenter</button>
+                </form>
+            `;
+            document.querySelector('.content').prepend(postContainer);
+            postForm.reset();
+        })
+        .catch(error => console.error('Erreur:', error));
+    });
+
+    // Gestion de l'ajout d'un commentaire
+    document.querySelectorAll('.comment-form').forEach(form => {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            formData.append('post_id', form.dataset.postId);
+
+            fetch('home.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const commentsDiv = document.getElementById(`comments-${data.post_id}`);
+                const commentContainer = document.createElement('div');
+                commentContainer.innerHTML = `
+                    <div style="margin-left: 20px;">
+                        <div class="comment-item">
+                            <div class="comment-inside">
+                                <img src="../img/imageTeste.png" alt="Photo de profil" class="image-mini">
+                                <strong>${data.email} :</strong>
+                            </div>
+                            <p>${data.content}</p>
+                            <small>Commenté le ${data.created_at}</small>
+                        </div>
+                    </div>
+                `;
+                commentsDiv.appendChild(commentContainer);
+                form.reset();
+            })
+            .catch(error => console.error('Erreur:', error));
+        });
+    });
+});
