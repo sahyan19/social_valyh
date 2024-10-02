@@ -14,8 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_id'] = $user['id'];
         header('Location: home.php');
     } else {
-        echo '<h1>Identifiants incorrects ou Compte introuvable</h1>';
-        echo "<button><a href='register.php' >S'inscrire</a></button>";
+        echo '<h1>Identifiants incorrects !</h1>';
     }
 }
 ?>
@@ -32,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2>Connexion</h2>
         <form method="POST" class="formulaire">
                 <label for="email">Email:</label>
-                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="email" name="email" placeholder="Email" class="input"  required><br>
                 <label for="password">Mot de passe:</label>
-                <input type="password" name="password" placeholder="Mot de passe" required><br>
+                <input type="password" name="password" class="input"  placeholder="Mot de passe" required><br>
                 <button type="submit">Se connecter</button>
         </form>
     </div>
