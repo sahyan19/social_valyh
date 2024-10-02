@@ -28,10 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Connexion</title>
 </head>
 <body>
-    <form method="POST">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Mot de passe" required>
-        <button type="submit">Se connecter</button>
-    </form>
+    <div class="container-formulaire">
+        <form method="POST" >
+            <div class="formulaire-login">
+                <h1>Connexion</h1>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Mot de passe" required>
+                <button type="submit">Se connecter</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

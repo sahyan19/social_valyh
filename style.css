@@ -4,6 +4,30 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+.formulaire-login {
+    padding: 10em 10em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.container-formulaire {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
 .body_index {
     font-family: 'Arial', sans-serif;
     background-color: #f0f0f5;
@@ -56,13 +80,6 @@
 .a_index:hover {
     background-color: #373775;
     transform: scale(1.05);
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    margin: 0;
-    padding: 20px;
 }
 
 h1 {
