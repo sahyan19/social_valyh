@@ -230,4 +230,4 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
         </div>
 </div>
 
-<script src="./js/script.js"></script>
+<script src="../js/script.js"></script>
