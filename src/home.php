@@ -92,14 +92,14 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
             <img src="../img/imageTeste.png" alt="Photo de profil" class="pdp">
             <h4><?= htmlspecialchars($user_email['email']) ?></h4>
         </div>
-        <button><a href="logout.php">Déconnexion</a></button>
+        <button class="btn"><a href="logout.php">Déconnexion</a></button>
     </div>
 
     <div class="content">
         <!-- Formulaire pour créer une nouvelle publication -->
         <form id="post-form">
             <textarea name="content" placeholder="Votre publication..." required></textarea>
-            <button type="submit">Publier</button>
+            <button class="btn" type="submit">Publier</button>
         </form>
 
         <hr>
@@ -132,7 +132,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                     </span>
 
                     <!-- Bouton Détails -->
-                    <button onclick="toggleDetails(<?= $post['id'] ?>)">Détails</button>
+                    <button class="btn" onclick="toggleDetails(<?= $post['id'] ?>)">Détails</button>
 
                     <!-- Détails des réactions -->
                     <div id="details-<?= $post['id'] ?>" style="display: none;">
@@ -161,7 +161,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                         <option value="sad">Sad</option>
                         <option value="angry">Angry</option>
                     </select>
-                    <button type="submit">Réagir</button>
+                    <button type="submit" class="btn">Réagir</button>
                 </form>
 
                 <h3>Commentaires :</h3>
@@ -177,7 +177,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                                 <div class="comment-item">
                                     <div class="comment-inside">
                                         <img src="../img/imageTeste.png" alt="Photo de profil" class="image-mini">
-                                        <strong><?= htmlspecialchars($comment['email']) ?> :</strong>
+                                        <strong><?= htmlspecialchars($comment['email']) ?></strong>
                                     </div>
                                     <p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
                                     <small>Commenté le <?= htmlspecialchars($comment['created_at']) ?></small>
@@ -203,7 +203,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                                         <i class="fas fa-angry reaction-angry" title="Angry"></i> <?= $reactionCounts['angry'] ?? 0 ?>
                                     </span>
 
-                                    <button onclick="toggleDetails(<?= $comment['id'] ?>, 'comment')">Détails</button>
+                                    <button class="btn" onclick="toggleDetails(<?= $comment['id'] ?>, 'comment')">Détails</button>
 
                                     <!-- Détails des réactions -->
                                     <div id="details-comment-<?= $comment['id'] ?>" style="display: none;">
@@ -230,7 +230,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                                         <option value="sad">Sad</option>
                                         <option value="angry">Angry</option>
                                     </select>
-                                    <button type="submit">Réagir</button>
+                                    <button type="submit" class="btn">Réagir</button>
                                 </form>
                             </div>
                         <?php endforeach; ?>
@@ -241,7 +241,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                     <form class="comment-form" data-post-id="<?= $post['id'] ?>">
                         <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
                         <textarea name="comment_content" placeholder="Votre commentaire..." required></textarea>
-                        <button type="submit">Commenter</button>
+                        <button class="comment-box" type="submit" class="envoyer"><img src="../img/envoyer.png" alt="envoyer" class="envoyer"></button>
                     </form>
                 </div>
             </div>

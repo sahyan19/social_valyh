@@ -58,6 +58,15 @@ body {
     margin-left: 3em;
 }
 
+
+.envoyer {
+    width: 2em;
+    height: 2em;
+    border: none;
+    color: rgb(27, 123, 233);
+    background-color: white;
+}
+
 .input{
     width: 100%;
     height: 3em;
@@ -132,7 +141,7 @@ textarea {
     resize: none;
 }
 
-button {
+.btn {
     background-color: #007bff;
     color: white;
     border: none;
@@ -142,9 +151,11 @@ button {
     transition: background 0.3s;
 }
 
-button:hover {
+.btn:hover {
     background-color: #0056b3; 
 }
+
+
 
 
 div {
@@ -224,6 +235,17 @@ button a {
     border-radius: 5px;
 }
 .comment-inside, .head-post {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.comment-box {
+    height: 2em;
+}
+
+.comment-form {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 1em;
