@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="email" name="email" class="input" placeholder="Email" required><br>
             <label for="password">Mot de Passe:</label>
             <input type="password" name="password" class="input" placeholder="Mot de passe" required><br>
-            <button type="submit" id="inscription">S'inscrire</button>
+            <button type="submit" class="btn">S'inscrire</button>
         </form>
     </div>
 </body>

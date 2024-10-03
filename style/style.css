@@ -36,14 +36,6 @@ body {
     text-align: center;
 }
 
-#inscription {
-    background-color: rgb(8, 124, 8);
-}
-
-#inscription:hover {
-    background-color: rgb(7, 99, 7);
-}
-
 .formulaire {
     text-align: center;
     max-width: 500px;
