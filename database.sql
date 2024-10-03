@@ -33,7 +33,7 @@ CREATE TABLE `comments` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (2,1,1,'Et ceci est son commentaire pour le test XoXo ...','2024-10-02 06:08:29'),(3,1,4,'test de commentaire avec un autre compte utilisateur ;)','2024-10-02 06:09:21'),(4,1,1,'Un autre compte pour mettre plus de commentaire','2024-10-02 06:10:40');
+INSERT INTO `comments` VALUES (2,1,1,'Et ceci est son commentaire pour le test XoXo ...','2024-10-02 06:08:29'),(3,1,4,'test de commentaire avec un autre compte utilisateur ;)','2024-10-02 06:09:21'),(4,1,1,'Un autre compte pour mettre plus de commentaire','2024-10-02 06:10:40'),(5,1,2,'commentaire de tahirihasina','2024-10-02 07:24:04'),(6,1,1,'2 ème commentaire','2024-10-02 14:02:47'),(7,1,1,'commentaire test sur l\'affichage dynamique avec ajax','2024-10-02 20:05:28'),(8,2,2,'commentaire d\'une autre compte sur le test de l\'affichage dynamique...','2024-10-02 20:13:07'),(9,3,4,'waouuuuh XD :)','2024-10-03 03:39:13');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `posts` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,1,'Ceci est la publication créer par Sahyan :)','2024-10-02 06:07:47');
+INSERT INTO `posts` VALUES (1,1,'Ceci est la publication créer par Sahyan :)','2024-10-02 06:07:47'),(2,1,'publication 3','2024-10-02 20:07:29'),(3,2,'Publication de tahirihasina ','2024-10-02 20:14:54');
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `reactions` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `reactions_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `reactions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `reactions` (
 
 LOCK TABLES `reactions` WRITE;
 /*!40000 ALTER TABLE `reactions` DISABLE KEYS */;
-INSERT INTO `reactions` VALUES (1,1,1,'like','2024-10-02 06:07:52',NULL),(2,NULL,1,'love','2024-10-02 06:08:33',2),(3,1,4,'love','2024-10-02 06:09:26',NULL),(4,NULL,4,'like','2024-10-02 06:09:39',3),(5,NULL,1,'like','2024-10-02 06:10:12',3),(6,NULL,1,'like','2024-10-02 06:10:44',4);
+INSERT INTO `reactions` VALUES (1,1,1,'wow','2024-10-02 06:07:52',NULL),(2,NULL,1,'love','2024-10-02 06:08:33',2),(3,1,4,'love','2024-10-02 06:09:26',NULL),(4,NULL,4,'like','2024-10-02 06:09:39',3),(5,NULL,1,'like','2024-10-02 06:10:12',3),(6,NULL,1,'like','2024-10-02 06:10:44',4),(7,1,2,'like','2024-10-02 07:22:02',NULL),(8,NULL,2,'love','2024-10-02 12:07:54',3),(9,NULL,2,'love','2024-10-02 12:09:54',5),(10,NULL,1,'sad','2024-10-02 14:01:40',5),(11,NULL,1,'love','2024-10-02 20:08:20',7),(12,NULL,1,'like','2024-10-02 20:08:34',6),(13,2,1,'like','2024-10-02 20:09:12',NULL),(14,2,2,'like','2024-10-02 20:12:32',NULL),(15,NULL,2,'sad','2024-10-02 20:13:48',2),(16,NULL,2,'like','2024-10-02 20:28:02',8),(17,3,4,'like','2024-10-03 03:38:27',NULL),(18,2,4,'love','2024-10-03 03:39:30',NULL),(19,NULL,4,'wow','2024-10-03 03:39:38',8),(20,3,1,'wow','2024-10-03 05:12:05',NULL),(21,NULL,1,'wow','2024-10-03 05:12:16',9);
 /*!40000 ALTER TABLE `reactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,4 +142,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-02  9:12:26
+-- Dump completed on 2024-10-03 15:16:28
