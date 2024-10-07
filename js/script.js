@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => response.json())
         .then(data => {
-            // Ajoutez ici le code pour afficher la nouvelle publication
             const postContainer = document.createElement('div');
             postContainer.id = `post-${data.id}`;
             postContainer.innerHTML = `
