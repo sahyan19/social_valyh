@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div id="comments-${data.id}"></div>
                 <form class="comment-form" data-post-id="${data.id}">
                     <textarea name="comment_content" placeholder="Votre commentaire..." required></textarea>
-                    <button type="submit">Commenter</button>
+                    <button type="submit" class="comment-box"><img src="../img/envoyer.png" alt="envoyer" class="envoyer"></button>
                 </form>
             `;
             document.querySelector('.content').prepend(postContainer);

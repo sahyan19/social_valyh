@@ -241,7 +241,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                     <form class="comment-form" data-post-id="<?= $post['id'] ?>">
                         <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
                         <textarea name="comment_content" placeholder="Votre commentaire..." required></textarea>
-                        <button class="comment-box" type="submit" class="envoyer"><img src="../img/envoyer.png" alt="envoyer" class="envoyer"></button>
+                        <button class="comment-box" type="submit" ><img src="../img/envoyer.png" alt="envoyer" class="envoyer"></button>
                     </form>
                 </div>
             </div>
