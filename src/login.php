@@ -30,9 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container-formulaire">
         <h2>Connexion</h2>
         <form method="POST" class="formulaire">
-                <label for="email">Email:</label>
                 <input type="email" name="email" placeholder="Email" class="input"  required><br>
-                <label for="password">Mot de passe:</label>
                 <input type="password" name="password" class="input"  placeholder="Mot de passe" required><br>
                 <button class="btn" type="submit">Se connecter</button>
         </form>

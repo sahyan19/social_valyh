@@ -25,9 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container-formulaire">
         <h2>Inscription</h2>
         <form method="POST" class="formulaire">
-            <label for="email">Email:</label>
             <input type="email" name="email" class="input" placeholder="Email" required><br>
-            <label for="password">Mot de Passe:</label>
             <input type="password" name="password" class="input" placeholder="Mot de passe" required><br>
             <button type="submit" class="btn">S'inscrire</button>
         </form>

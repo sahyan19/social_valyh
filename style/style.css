@@ -36,6 +36,10 @@ body {
     text-align: center;
 }
 
+.content form {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .formulaire {
     text-align: center;
     max-width: 500px;
@@ -43,7 +47,7 @@ body {
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); */
 }
 
 .comments-section {
@@ -76,6 +80,8 @@ body {
     border-radius: 5px;
     margin: 10px;
     padding: 0 0.5em;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .container {
@@ -132,7 +138,7 @@ form {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
     margin-bottom: 20px;
     gap: 1em;
 }
@@ -219,6 +225,7 @@ input[type="text"] {
     border: 1px solid #ccc;
     padding: 10px;
     margin-right: 10px;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
 }
 
 select {
