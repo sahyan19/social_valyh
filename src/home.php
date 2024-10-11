@@ -102,11 +102,11 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
             <button class="btn" type="submit">Publier</button>
         </form>
 
-        <hr>
+        <!-- <hr> -->
 
         <!-- Affichage des publications -->
         <?php foreach ($posts as $post): ?>
-            <div>
+            <div class="post">
                 <h3 class="head-post"><img src="../img/imageTeste.png" alt="photo de profil" class="image-gros"><?= htmlspecialchars($post['email']) ?> a publié :</h3>
                 <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
                 <small>Publié le <?= htmlspecialchars($post['created_at']) ?></small>
@@ -167,7 +167,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                 <h3>Commentaires :</h3>
 
                 <!-- Afficher les commentaires -->
-                <div class="commets-section">
+                <div class="comments-section">
                     <div id="comments-<?= $post['id']?>">
                         <?php
                         $comments = $pdo->prepare('SELECT comments.*, users.email FROM comments JOIN users ON comments.user_id = users.id WHERE post_id = ?');
@@ -245,7 +245,7 @@ $posts = $pdo->query('SELECT posts.*, users.email FROM posts JOIN users ON posts
                     </form>
                 </div>
             </div>
-            <hr>
+            <!-- <hr> -->
         <?php endforeach; ?>
     </div>
 </div>

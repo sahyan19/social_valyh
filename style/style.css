@@ -46,8 +46,13 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-.commets-section {
+.comments-section {
     margin-left: 3em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section div {
+    padding: 0 !important;
 }
 
 
@@ -57,6 +62,12 @@ body {
     border: none;
     color: rgb(27, 123, 233);
     background-color: white;
+}
+
+.envoyer:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+    transition-duration: 0.3s;
 }
 
 .input{
@@ -80,6 +91,7 @@ body {
     display: flex;
     gap : 1em;
     align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .pdp {
     border-radius: 50%;
@@ -122,6 +134,7 @@ form {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    gap: 1em;
 }
 
 textarea {
@@ -154,7 +167,7 @@ div {
     background: white;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
     margin-bottom: 20px;
 }
 
@@ -232,8 +245,17 @@ button a {
     gap: 1em;
 }
 
+#post-form textarea {
+    height: 4rem;
+}
+
 .comment-box {
     height: 2em;
+    border: none;
+}
+
+.post {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .comment-form {
@@ -253,6 +275,12 @@ button a {
     border-radius: 50%;
     width: 2em;
     height: 2em;
+}
+
+textarea {
+    border: none;
+    outline: none;
+    height: 2rem;
 }
 
 @media (max-width: 600px) {
